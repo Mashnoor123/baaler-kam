@@ -15,7 +15,7 @@ input.addEventListener("input", () => {
 
 
 let heading = document.getElementById("heading");
-function getMealList() {
+function getCountries() {
     let url = "https://restcountries.com/v3.1/all"
     fetch(url)
         .then(response => response.json())
@@ -37,7 +37,7 @@ function getMealList() {
                                    <img src=${data[i].flags.png} class="card-img-top" alt="...">                                    
                                    <div class="card-body">
                                        <h5 class="card-title">${data[i].name.common}</h5>
-                                       <button class="btn btn-success" onclick="more(${data[i].population}, ${indexNumber})">More Details</button>
+                                       <button class="btn btn-success" onclick="more(${data[i].population}, ${data[i].continents}, ${indexNumber})">More Details</button>
                                    </div>
                                </div>
                                </div>`;
@@ -48,29 +48,28 @@ function getMealList() {
         }).catch(error => console.log(error));
 
 
-    }
-    
+}
 
-    getMealList();
 
-    function more(population, elementIndex) {
-        let toggle = true;
-        if (toggle) {
-            let cardBody = document.querySelectorAll(".card-body");
-            console.log(cardBody[elementIndex]);
+getCountries();
 
-            let html = "";
-            html += `<ul class="list-group list-group-flush">
-                    <li class="list-group-item">Capital: ${population}</li>
+function more(population, continents, elementIndex) {
+    let toggle = true;
+    if (toggle) {
+        let cardBody = document.querySelectorAll(".card-body");
+        console.log(cardBody[elementIndex]);
+
+        let html = "";
+        html += `<ul class="list-group list-group-flush">
                     <li class="list-group-item">Population: ${population}</li>
-                    <li class="list-group-item">Currency: ${population}</li>
+                    <li class="list-group-item">Currency: ${continents}</li>
                     </ul>`;
 
-            cardBody[elementIndex].innerHTML = html;
-            toggle = false;
+        cardBody[elementIndex].innerHTML = html;
+        toggle = false;
 
-        }
     }
+}
 
 
 // function getMealList() {
@@ -101,6 +100,3 @@ function getMealList() {
 
 
 // }
-
-
-
