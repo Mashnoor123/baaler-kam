@@ -27,10 +27,10 @@ function getMealList() {
 
                 let seeMoreDetails = {
                     index: indexNumber,
-                    population:  data[i].population,
-                    capital: data[i].capital 
+                    population: data[i].population,
+                    capital: data[i].capital
                 } // ei object ta pass kore dis more() function e, better hobe than inputing multiple varibales as parameters
-                
+
                 html += `
                           <div class="col-lg-4 col-md-6 d-flex justify-content-center d-sm-flex justify-content-sm-center my-2 goat">
                                 <div class="card" style="width: 18rem;">
@@ -48,26 +48,29 @@ function getMealList() {
         }).catch(error => console.log(error));
 
 
-}
-getMealList();
-
-function more(population, elementIndex) {
-    let toggle = true;
-    if (toggle) {
-        let cardBody = document.querySelectorAll(".card-body");
-        console.log(cardBody[elementIndex]);
-
-        let html = "";
-            html += `<ul class="list-group list-group-flush">
-                <li class="list-group-item">Capital: ${population}</li>
-                <li class="list-group-item">Population: ${population}</li>
-                <li class="list-group-item">Currency: ${population}</li>
-                </ul>`;
-
-        cardBody[elementIndex].innerHTML = html;
-
     }
-}
+    
+
+    getMealList();
+
+    function more(population, elementIndex) {
+        let toggle = true;
+        if (toggle) {
+            let cardBody = document.querySelectorAll(".card-body");
+            console.log(cardBody[elementIndex]);
+
+            let html = "";
+            html += `<ul class="list-group list-group-flush">
+                    <li class="list-group-item">Capital: ${population}</li>
+                    <li class="list-group-item">Population: ${population}</li>
+                    <li class="list-group-item">Currency: ${population}</li>
+                    </ul>`;
+
+            cardBody[elementIndex].innerHTML = html;
+            toggle = false;
+
+        }
+    }
 
 
 // function getMealList() {
