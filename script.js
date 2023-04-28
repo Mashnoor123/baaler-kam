@@ -22,13 +22,22 @@ function getMealList() {
         .then(data => {
             let html = "";
             for (i in data) {
+
+                let indexNumber = data.indexOf(data[i]); // tor ei index number lagbe eta chara bujhbe na tor more() function je kon card r details dekhaite hobe, indexNumber ta jodi na bujhos eta console.log kore dekhe nite paros
+
+                let seeMoreDetails = {
+                    index: indexNumber,
+                    population: data[i].population,
+                    capital: data[i].capital
+                } // ei object ta pass kore dis more() function e, better hobe than inputing multiple varibales as parameters
+
                 html += `
                           <div class="col-lg-4 col-md-6 d-flex justify-content-center d-sm-flex justify-content-sm-center my-2 goat">
                                 <div class="card" style="width: 18rem;">
                                    <img src=${data[i].flags.png} class="card-img-top" alt="...">                                    
                                    <div class="card-body">
                                        <h5 class="card-title">${data[i].name.common}</h5>
-                                       <button class="btn btn-success" onclick="more(${data[i].population})">More Details</button>
+                                       <button class="btn btn-success" onclick="more(${data[i].population}, ${indexNumber})">More Details</button>
                                    </div>
                                </div>
                                </div>`;
@@ -39,36 +48,29 @@ function getMealList() {
         }).catch(error => console.log(error));
 
 
-}
-getMealList();
+    }
+    
 
-function more(population) {
-    let toggle = true;
-    if (toggle) {
-        let cardBody = document.querySelectorAll(".card-body");
-        // cardBody.forEach((element, index) => {
-        //     let html = "";
-        //     html += `<ul class="list-group list-group-flush">
-        //     <li class="list-group-item">An item</li>
-        //     <li class="list-group-item">A second item</li>
-        //     <li class="list-group-item">A third item</li>
-        //     </ul>
-        //     `;
-        //     element[index].innerHTML = html
-        //     // cardBody[index].innerHTML = html;
-        // })
-        for (let i = 0; i <= cardBody.length; i++) {
+    getMealList();
+
+    function more(population, elementIndex) {
+        let toggle = true;
+        if (toggle) {
+            let cardBody = document.querySelectorAll(".card-body");
+            console.log(cardBody[elementIndex]);
+
             let html = "";
             html += `<ul class="list-group list-group-flush">
-                <li class="list-group-item">${population}</li>
-                <li class="list-group-item">${population}</li>
-                <li class="list-group-item">${population}</li>
-                </ul>`;
-            cardBody[i].innerHTML = html;
-        }
+                    <li class="list-group-item">Capital: ${population}</li>
+                    <li class="list-group-item">Population: ${population}</li>
+                    <li class="list-group-item">Currency: ${population}</li>
+                    </ul>`;
 
+            cardBody[elementIndex].innerHTML = html;
+            toggle = false;
+
+        }
     }
-}
 
 
 // function getMealList() {
